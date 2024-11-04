@@ -1,0 +1,14 @@
+name: pytorchenv
+channels:
+  - defaults
+dependencies:
+  - numpy
+  - pandas
+  - matplotlib
+  - pillow
+  - pip
+  - plotly
+  - scikit-learn
+  - seaborn
+  - python
+  - jupyter

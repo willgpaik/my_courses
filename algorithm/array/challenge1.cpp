@@ -29,6 +29,7 @@ public:
         size = 100;
         length = len;
         A = new int[size];
+
         for (int i = 0; i < len; i++)
             A[i] = array[i];
     }

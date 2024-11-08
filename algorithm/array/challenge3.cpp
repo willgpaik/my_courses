@@ -52,7 +52,17 @@ void Array::disp()
 
 void Array::missing()
 {
-    int *hashTable = new int[length + 1];
+    int minVal = A[0]; // min value in array
+    int maxVal = A[0]; // max value in array
+    
+    for (int i = 0; i < length; i++)
+    {
+        minVal = min(minVal, A[i]);
+        maxVal = max(maxVal, A[i]);
+    }
+
+    int *hashTable = new int[maxVal + 1]; // size is maxVal + 1 (0 - maxVal+1)
+    // idx = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] -> total of 13 elements are needed
     
     for (int i = 0; i < length + 1; i++)
         hashTable[i] = 0;
@@ -60,7 +70,7 @@ void Array::missing()
     for (int i = 0; i < length; i++)
         hashTable[A[i]] = 1;
 
-    for (int i = 1; i < length + 1; i++)
+    for (int i = minVal; i < maxVal + 1; i++)
         if (hashTable[i] == 0)
             cout << i + hashTable[1] - 1 << " ";
     cout << "\n";

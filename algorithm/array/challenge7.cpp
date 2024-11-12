@@ -1,4 +1,4 @@
-// finding pari with sum k (a + b = k)
+// finding pair with sum k (a + b = k)
 // no duplicate elements
 #include <iostream>
 

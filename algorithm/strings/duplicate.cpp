@@ -1,4 +1,5 @@
 // find duplicates in a string (lower case)
+// lecture 139 (bitwise operation)
 #include <iostream>
 
 using namespace std;
@@ -30,6 +31,23 @@ void duplicate2(char *a)
 void duplicate3(char *a)
 {
     // bitwise operations
+    int H = 0; // assume 32 bits (4 bytes) to store 26 chars
+    int x = 0;
+    
+    for (int i = 0; a[i] != '\0'; i++)
+    {
+        x = 1; // initialize to 1
+        x = x<<(a[i] - 97); // shift a[i] - 97 times
+        
+        if ((x & H) > 0) // ANDing
+            // perform masking:
+            // if bit on x and H are different -> 0
+            cout << "duplicate of " << a[i] << " found\n";
+        else // if not same
+            // perform merging:
+            // if either x and H are same -> 1
+            H = x | H;
+    }
 }
 
 

@@ -1,34 +1,57 @@
-// create a diagonal matrix
+// creating a diagonal matrix with class
 #include <iostream>
 
-struct Matrix
+class Diagonal
 {
-    int A[10];
-    int n;
+    int n; // dimension
+    int *A;
+
+public:
+    Diagonal()
+    {
+        n = 1;
+        A = new int [n];
+    }
+
+    Diagonal(int n)
+    {
+        this->n = n;
+        A = new int [n];
+    }
+
+    ~Diagonal()
+    {
+        delete [] A;
+    }
+
+    void set(int r, int c, int x);
+    int get(int r, int c);
+    void disp();
+
 };
 
-void set(Matrix *m, int i, int j, int x)
+void Diagonal::set(int r, int c, int x)
 {
-    if (i == j);
-        m->A[i-1] = x;
+    if (r == c)
+        A[r-1] = x; // r and c start from 1 (i.e. row 1, col 1)
 }
 
-int get(Matrix m, int i, int j)
+int Diagonal::get(int r, int c)
 {
-    if (i == j)
-        return m.A[i-1];
+    if (r == c)
+        return A[r-1];
     else
         return 0;
 }
 
-void disp(Matrix m)
+void Diagonal::disp()
 {
-    for (int i = 0; i < m.n; i++)
+    for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < m.n; j++)
+        for (int j = 0; j < n; j++)
         {
             if (i == j)
-                std::cout << m.A[i] << " ";
+                std::cout << A[i] << " ";
             else
                 std::cout << "0 ";
         }
@@ -39,17 +62,14 @@ void disp(Matrix m)
 
 int main()
 {
-    Matrix m;
-    m.n = 4;
+    Diagonal m(4);
 
-    set(&m, 1, 1, 5);
-    set(&m, 2, 2, 8);
-    set(&m, 3, 3, 9);
-    set(&m, 4, 4, 12);
+    m.set(1,1,5);
+    m.set(2,2,8);
+    m.set(3,3,9);
+    m.set(4,4,12);
 
-    std::cout << get(m, 2, 2) << "\n";
-
-    disp(m);
+    m.disp();
 
     return 0;
 }

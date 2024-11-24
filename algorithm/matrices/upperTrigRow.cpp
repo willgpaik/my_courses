@@ -65,7 +65,7 @@ int main()
     std::cout << "enter dimension: ";
     std::cin >> d;
 
-    UpperTrig lm(d);
+    UpperTrig um(d);
 
     int x;
     std::cout << "enter all elements\n";
@@ -79,13 +79,13 @@ int main()
         for (int j = 1; j <= d; j++)
         {
             std::cin >> x;
-            lm.set(i, j, x);
+            um.set(i, j, x);
         }
     }
 
     std::cout << "\n\n";
 
-    lm.disp();
+    um.disp();
 
     return 0;
 }

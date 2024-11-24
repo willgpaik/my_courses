@@ -1,25 +1,25 @@
-// upper triangular matrix with column-major order
+// tridiagonal matrix
 #include <iostream>
 
-class UpperTrig
+class Tridiag
 {
     int *A;
     int n;
 
 public:
-    UpperTrig()
+    Tridiag()
     {
         n = 2;
-        A = new int[2*(2+1)/2];
+        A = new int[3*2-2];
     }
 
-    UpperTrig(int n)
+    Tridiag(int n)
     {
         this->n = n;
-        A = new int[n*(n+1)/2];
+        A = new int[3*n-2];
     }
 
-    ~UpperTrig()
+    ~Tridiag()
     {
         delete [] A;
     }
@@ -29,28 +29,40 @@ public:
     void disp();
 };
 
-void UpperTrig::set(int r, int c, int x)
+void Tridiag::set(int r, int c, int x)
 {
-    if (r <= c)
-        A[c*(c-1)/2 + r-1] = x;
+    if (r-c == 1)
+        A[r-2] = x;
+    else if (r-c == 0)
+        A[n-1 + r-1] = x;
+    else if (r-c == -1)
+        A[2*n-1 + r-1] = x;
 }
 
-int UpperTrig::get(int r, int c)
+int Tridiag::get(int r, int c)
 {
-    if (r <= c)
-        return A[c*(c-1)/2 + r-1];
+    if (r-c == 1)
+        return A[r-2];
+    else if (r-c == 0)
+        return A[n-1 + r-1];
+    else if (r-c == -1)
+        return A[2*n-1 + r-1];
     else
         return 0;
 }
 
-void UpperTrig::disp()
+void Tridiag::disp()
 {
     for (int i = 1; i <= n; i++)
     {
         for (int j = 1; j <= n; j++)
         {
-            if (i <= j)
-                std::cout << A[j*(j-1)/2 + i-1] << " ";
+            if (i - j == 1)
+                std::cout << A[i-2] << " ";
+            else if (i - j == 0)
+                std::cout << A[n-1 + i-1] << " ";
+            else if (i - j == -1)
+                std::cout << A[2*n-1 + i-1] << " ";
             else
                 std::cout << "0 ";
         }
@@ -65,7 +77,7 @@ int main()
     std::cout << "enter dimension: ";
     std::cin >> d;
 
-    UpperTrig um(d);
+    Tridiag tridiag(d);
 
     int x;
     std::cout << "enter all elements\n";
@@ -79,13 +91,13 @@ int main()
         for (int j = 1; j <= d; j++)
         {
             std::cin >> x;
-            um.set(i, j, x);
+            tridiag.set(i, j, x);
         }
     }
 
     std::cout << "\n\n";
 
-    um.disp();
+    tridiag.disp();
 
     return 0;
 }

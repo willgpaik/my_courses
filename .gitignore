@@ -1,5 +1,6 @@
 *.out
 *.tar.*
 *.zip
+*.net
 cifar-10-batches-py/
 CATS_DOGS/

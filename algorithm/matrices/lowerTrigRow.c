@@ -47,6 +47,11 @@ int main()
 
     int x;
     printf("enter all elements:\n");
+    // i.e. type:
+    // 1 0 0 0
+    // 1 2 0 0
+    // 1 2 3 0
+    // 1 2 3 4
     for (int i = 1; i <= m.n; i++)
     {
         for (int j = 1; j <= m.n; j++)

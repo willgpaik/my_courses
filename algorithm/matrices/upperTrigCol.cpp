@@ -1,25 +1,25 @@
-// lower triangular matrix with column-major order
+// upper triangular matrix with column-major order
 #include <iostream>
 
-class LowerTrig
+class UpperTrig
 {
     int *A;
     int n;
 
 public:
-    LowerTrig()
+    UpperTrig()
     {
         n = 2;
         A = new int[2*(2+1)/2];
     }
 
-    LowerTrig(int n)
+    UpperTrig(int n)
     {
         this->n = n;
         A = new int[n*(n+1)/2];
     }
 
-    ~LowerTrig()
+    ~UpperTrig()
     {
         delete [] A;
     }
@@ -29,28 +29,28 @@ public:
     void disp();
 };
 
-void LowerTrig::set(int r, int c, int x)
+void UpperTrig::set(int r, int c, int x)
 {
-    if (r >= c)
-        A[n*(c-1)-(c-2)*(c-1)/2 + r-c] = x;
+    if (r <= c)
+        A[c*(c-1)/2 + r-1] = x;
 }
 
-int LowerTrig::get(int r, int c)
+int UpperTrig::get(int r, int c)
 {
-    if (r >= c)
-        return A[n*(c-1)-(c-2)*(c-1)/2 + r-c];
+    if (r <= c)
+        return A[c*(c-1)/2 + r-1];
     else
         return 0;
 }
 
-void LowerTrig::disp()
+void UpperTrig::disp()
 {
     for (int i = 1; i <= n; i++)
     {
         for (int j = 1; j <= n; j++)
         {
-            if (i >= j)
-                std::cout << A[n*(j-1)-(j-2)*(j-1)/2 + i-j] << " ";
+            if (i <= j)
+                std::cout << A[j*(j-1)/2 + i-1] << " ";
             else
                 std::cout << "0 ";
         }
@@ -65,15 +65,15 @@ int main()
     std::cout << "enter dimension: ";
     std::cin >> d;
 
-    LowerTrig lm(d);
+    UpperTrig lm(d);
 
     int x;
     std::cout << "enter all elements\n";
     // i.e. type:
-    // 1 0 0 0
-    // 1 2 0 0
-    // 1 2 3 0
     // 1 2 3 4
+    // 0 2 3 4
+    // 0 0 3 4
+    // 0 0 0 4
     for (int i = 1; i <= d; i++)
     {
         for (int j = 1; j <= d; j++)

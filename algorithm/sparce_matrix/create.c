@@ -1,4 +1,4 @@
-// addition of sparce matrices
+// addition of sparse matrices
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -9,7 +9,7 @@ struct Element
     int x;
 };
 
-struct Sparce
+struct Sparse
 {
     int m; // rows
     int n; // cols
@@ -17,7 +17,7 @@ struct Sparce
     struct Element *e;
 };
 
-void create (struct Sparce *s)
+void create (struct Sparse *s)
 {
     printf("enter dimensions: ");
     scanf("%d%d", &s->m, &s->n);
@@ -33,7 +33,7 @@ void create (struct Sparce *s)
         scanf("%d%d%d", &s->e[i].i, &s->e[i].j, &s->e[i].x);
 }
 
-void disp (struct Sparce s)
+void disp (struct Sparse s)
 {
     int k = 0;
 
@@ -53,7 +53,7 @@ void disp (struct Sparce s)
 
 int main()
 {
-    struct Sparce s;
+    struct Sparse s;
 
     create(&s);
     printf("\n\n");

@@ -67,6 +67,18 @@ int RmaxElem(struct Node *p)
     }
 }
 
+int maxElem2(struct Node *p)
+{
+    // use ternary operator
+    int val = 0;
+
+    if (p == NULL)
+        return INT_MIN;
+    
+    val = maxElem2(p->next);    
+    return val > p->data ? val : p->data;
+}
+
 
 int main()
 {
@@ -78,7 +90,7 @@ int main()
     disp(first);
     printf("\n");
 
-    printf("maximum element is %d\n", RmaxElem(first));
+    printf("maximum element is %d\n", maxElem2(first));
     
     return 0;
 }

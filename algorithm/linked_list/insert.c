@@ -71,6 +71,30 @@ void insert(struct Node *p, int idx, int x)
     }
 }
 
+void insertLast(struct Node *p, int x)
+{
+    // always insert to the last
+
+    // create a new node
+    struct Node *t;
+    t = (struct Node*) malloc (sizeof(struct Node));
+    t->data = x;
+    t->next = NULL;
+
+    struct Node *last;
+
+    if (first == NULL)
+        first = last = t;
+    else
+    {
+        last = p;
+        while (last->next)
+            last = last->next;
+        last->next = t;
+        last = t;
+    }
+}
+
 
 int main()
 {
@@ -84,6 +108,8 @@ int main()
     
     insert(first, 0, 2);
     insert(first, 6, 20);
+    insertLast(first, 23);
+    insertLast(first, 32);
     
     disp(first);
     printf("\n");

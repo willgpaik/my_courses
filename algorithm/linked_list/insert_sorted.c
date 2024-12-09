@@ -1,4 +1,4 @@
-// insert a node to a link list
+// insert a node to a sorted link list
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -95,6 +95,39 @@ void insertLast(struct Node *p, int x)
     }
 }
 
+void insertSorted(struct Node *p, int x)
+{
+    // insert an element to a sorted linked list
+    struct Node *q = NULL;
+
+    struct Node *t = (struct Node*) malloc (sizeof(struct Node));
+    t->data = x;
+    t->next = NULL;
+
+    if (first == NULL)
+        first = t;
+    else
+    {
+        while (p && p->data < x)
+        {
+            q = p;
+            p = p->next;
+        }
+        
+        if (p == first)
+        {
+            // if x is smaller than p->data (p remains first node after the while loop)
+            t->next = first;
+            first = t;
+        }
+        else
+        {
+            t->next = q->next;
+            q->next = t;
+        }
+    }
+}
+
 
 int main()
 {
@@ -111,6 +144,8 @@ int main()
     insertLast(first, 23);
     insertLast(first, 32);
     
+    insertSorted(first, 16); 
+
     disp(first);
     printf("\n");
     

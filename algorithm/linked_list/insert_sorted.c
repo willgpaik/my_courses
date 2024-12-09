@@ -144,7 +144,8 @@ int main()
     insertLast(first, 23);
     insertLast(first, 32);
     
-    insertSorted(first, 16); 
+    insertSorted(first, 16);
+    insertSorted(first, 0);
 
     disp(first);
     printf("\n");

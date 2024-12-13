@@ -235,6 +235,7 @@ void reverse2(struct Node *p)
 
     while (p != NULL)
     {
+        // sliding
         r = q;
         q = p;
         p = p->next;
@@ -247,6 +248,7 @@ void reverse2(struct Node *p)
 void reverse3(struct Node *p, struct Node *q)
 {
     // using recursion
+    // q is previous node
     if (p != NULL)
     {
         reverse3(p->next, p);

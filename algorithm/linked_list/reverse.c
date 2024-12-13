@@ -272,8 +272,7 @@ int main()
     
 //    reverse1(first);
 //    reverse2(first);
-    struct Node *q = NULL;
-    reverse3(first, q);
+    reverse3(first, NULL);
 
     printf("\n");
     disp(first);

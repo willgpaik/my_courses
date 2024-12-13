@@ -203,8 +203,10 @@ void deleteDuplicate(struct Node *p)
 void reverse1(struct Node *p)
 {
     // create a tmp array and swap values in each node
-    int size = count(p);
-    int a[size];
+//    int size = count(p);
+//    int a[size];
+    int *a;
+    a = (int *) malloc(sizeof(int)*count(p));
 
     int cnt = 0;
     while (p != NULL)
@@ -224,6 +226,37 @@ void reverse1(struct Node *p)
     }
 }
 
+void reverse2(struct Node *p)
+{
+    // using sliding pointers
+    struct Node *q, *r;
+    q = NULL;
+    r = NULL;
+
+    while (p != NULL)
+    {
+        r = q;
+        q = p;
+        p = p->next;
+
+        q->next = r;
+    }
+    first = q;
+}
+
+void reverse3(struct Node *p, struct Node *q)
+{
+    // using recursion
+    if (p != NULL)
+    {
+        reverse3(p->next, p);
+
+        p->next = q;
+    }
+    else
+        first = q;
+}
+
 
 int main()
 {
@@ -235,7 +268,10 @@ int main()
     disp(first);
     printf("\n");
     
-    reverse1(first);
+//    reverse1(first);
+//    reverse2(first);
+    struct Node *q = NULL;
+    reverse3(first, q);
 
     printf("\n");
     disp(first);

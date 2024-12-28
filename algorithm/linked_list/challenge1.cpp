@@ -39,7 +39,7 @@ void disp(Node *p)
     std::cout << "\n";
 }
 
-void challenge1(Node* p)
+void challenge1(Node *p)
 {
     int size;
 
@@ -56,6 +56,22 @@ void challenge1(Node* p)
     std::cout << "challenge 1: " << q->data << "\n";
 }
 
+void challenge2(Node *p)
+{
+    Node *q = p;
+
+    while (q)
+    {
+        q = q->next;
+        if (q)
+            q = q->next;
+        if (q)
+            p = p->next;
+    }
+
+    std::cout <<"challenge 2: " << p->data << "\n";
+}
+
 
 int main()
 {
@@ -64,6 +80,7 @@ int main()
     disp(head);
 
     challenge1(head);
+    challenge2(head);
 
     return 0;
 }

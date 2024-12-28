@@ -1,5 +1,7 @@
 // find a middle node of a linked list
 #include <iostream>
+#include <cmath>
+#include <stack>
 
 class Node
 {
@@ -41,7 +43,7 @@ void disp(Node *p)
 
 void challenge1(Node *p)
 {
-    int size;
+    int size = 0;
 
     while (p)
     {
@@ -50,7 +52,7 @@ void challenge1(Node *p)
     }
 
     Node *q = head;
-    for (int i = 0; i < int (size/2)-1; i++)
+    for (int i = 0; i < (int) ceil(size/2.)-1; i++)
         q = q->next;
 
     std::cout << "challenge 1: " << q->data << "\n";
@@ -72,15 +74,38 @@ void challenge2(Node *p)
     std::cout <<"challenge 2: " << p->data << "\n";
 }
 
+void challenge3(Node *p)
+{
+    std::stack<Node*> myStack;
+    int size;
+
+    while (p)
+    {
+        myStack.push(p);
+        p = p->next;
+    }
+
+    size = (int) floor(myStack.size()/2.);
+
+    while (size != 0)
+    {
+        myStack.pop();
+        size--;
+    }
+
+    std::cout <<"challenge 3: " << myStack.top()->data << "\n";
+}
+
 
 int main()
 {
-    int a[] = {8, 6, 3, 9, 10, 4, 2, 12};
-    create(a, 8);
+    int a[] = {8, 6, 3, 9, 10, 4, 2};
+    create(a, 7);
     disp(head);
 
     challenge1(head);
     challenge2(head);
+    challenge3(head);
 
     return 0;
 }

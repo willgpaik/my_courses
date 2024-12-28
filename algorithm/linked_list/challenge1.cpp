@@ -14,8 +14,6 @@ void create(int *a, int n)
 {
     Node *last, *t;
     
-    //create head node 
-    head = new Node;
     head->data = a[0];
     head->next = NULL;
     last = head;
@@ -52,7 +50,7 @@ void challenge1(Node* p)
     }
 
     Node *q = head;
-    for (int i = 0; i < size/2; i++)
+    for (int i = 0; i < int (size/2)-1; i++)
         q = q->next;
 
     std::cout << "challenge 1: " << q->data << "\n";

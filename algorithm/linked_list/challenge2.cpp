@@ -44,7 +44,7 @@ void disp(Node *p)
 
 int main()
 {
-    int a[] = {8, 6, 3, 9, 10, 4, 2};
+    int a[] = {8, 6, 3, 9, 10, 4, 2, 12};
     create(a, 7);
     disp(head);
 

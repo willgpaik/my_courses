@@ -46,6 +46,9 @@ int main()
 {
     int a[] = {8, 6, 3, 9, 10, 4, 2, 12};
     create(a, 7);
+    int b[] = {20, 30, 40};
+    create(b, 3);
+
     disp(head);
 
     return 0;

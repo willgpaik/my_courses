@@ -17,9 +17,9 @@ void create(int *a, int n)
 {
     Node *last, *t;
     
-    head->data = a[0];
-    head->next = NULL;
-    last = head;
+    first->data = a[0];
+    first->next = NULL;
+    last = first;
 
     for (int i = 1; i < n; i++)
     {
@@ -51,6 +51,33 @@ void createSecond(int *a, int n, Node *p)
     tail->next = p;
 }
 
+void intersection(Node *p, Node *q)
+{
+    std::stack<Node*> stk1;
+    while (p)
+    {
+        stk1.push(p);
+        p = p->next;
+    }
+
+    std::stack<Node*> stk2;
+    while (q)
+    {
+        stk2.push(q);
+        q = q->next;
+    }
+
+    Node *r;
+    while (stk1.top() == stk2.top())
+    {
+        r = stk1.top();
+        stk1.pop();
+        stk2.pop();
+    }
+
+    std::cout << "intersecting node: " << r->data << "\n";
+}
+
 void disp(Node *p)
 {
     while (p)
@@ -79,6 +106,9 @@ int main()
     }
     int b[] = {20, 30, 40};
     createSecond(b, 3, tmp);
+
+    disp(first);
+    disp(second);
 
     intersection(first, second);
 

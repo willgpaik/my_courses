@@ -28,7 +28,7 @@ public:
 
     void create();
     void disp();
-    void eval(int x);
+    long eval(int x);
 };
 
 void Polynomial::create()
@@ -58,12 +58,27 @@ void Polynomial::create()
 
 void Polynomial::disp()
 {
-    while (poly)
+    Node *p = poly;
+    while (p)
     {
-        std::cout << poly->coeff << "x^" << poly->exp << " + ";
-        poly = poly->next;
+        std::cout << p->coeff << "x^" << p->exp << " + ";
+        p = p->next;
     }
     std::cout << "\n";
+}
+
+long Polynomial::eval(int x)
+{
+    Node *p = poly;
+    long sum = 0;
+
+    while (p)
+    {
+        sum += p->coeff*pow(x, p->exp);
+        p = p->next;
+    }
+
+    return sum;
 }
 
 
@@ -72,7 +87,10 @@ int main()
     Polynomial a;
     a.create();
     a.disp();
-//    a.eval(1);
+    int x;
+    std::cout << "what is x: ";
+    std::cin >> x;
+    std::cout << "\nfunction evaluation: " <<  a.eval(x) << "\n";
 
     return 0;
 }

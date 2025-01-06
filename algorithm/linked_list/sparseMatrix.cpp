@@ -71,6 +71,8 @@ void Sparse::disp()
     Node *p;
     for (int i = 0; i < row; i++)
     {
+        p = a[i];
+
         for (int j = 0; j < col; j++)
         {
             if (p != NULL && j == p->col)

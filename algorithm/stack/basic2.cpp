@@ -29,6 +29,22 @@ public:
     int top();
 };
 
+bool Stack::isEmpty()
+{
+    if (top == -1)
+        return true;
+    else
+        return false;
+}
+
+bool Stack::isFull()
+{
+    if (top == size-1)
+        return true;
+    else
+        return false;
+}
+
 
 int main()
 {

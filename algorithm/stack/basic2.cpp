@@ -15,9 +15,10 @@ public:
         top = -1;
         s = new int [size];
     }
+
     ~Stack()
     {
-        delete [] s
+        delete [] s;
     }
 
     bool isEmpty();
@@ -26,7 +27,7 @@ public:
     int pop();
     int peak(int idx);
     void disp();
-    int top();
+    int stackTop();
 };
 
 bool Stack::isEmpty()
@@ -45,9 +46,40 @@ bool Stack::isFull()
         return false;
 }
 
+void Stack::push(int x)
+{
+    if (isFull())
+        std::cout << "stack overflow\n";
+    else
+    {
+        top++;
+        s[top] = x;
+    }
+}
+
+int Stack::pop()
+{
+    int x = -1;
+
+    if (isEmpty())
+        std::cout << "stack underflow\n";
+    else
+    {
+        x = s[top];
+        top--;
+
+    }
+
+    return x;
+}
+
 
 int main()
 {
+    Stack a(5);
+
+    a.push(1);
+    a.pop();
 
     return 0;
 }

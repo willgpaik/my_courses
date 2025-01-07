@@ -46,6 +46,19 @@ bool Stack::isFull()
         return false;
 }
 
+void Stack::disp()
+{
+    if (isEmpty())
+        std::cout << "stack is empty\n";
+    else
+    {
+        for (int i = 0; i <= top; i++)
+            std::cout << s[i] << " ";
+
+        std::cout << "\n";
+    }
+}
+
 void Stack::push(int x)
 {
     if (isFull())
@@ -79,7 +92,9 @@ int main()
     Stack a(5);
 
     a.push(1);
+    a.disp();
     a.pop();
+    a.disp();
 
     return 0;
 }

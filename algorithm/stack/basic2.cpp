@@ -25,7 +25,7 @@ public:
     bool isFull();
     void push(int x);
     int pop();
-    int peak(int idx);
+    int peek(int pos);
     void disp();
     int stackTop();
 };
@@ -86,15 +86,37 @@ int Stack::pop()
     return x;
 }
 
+int Stack::peek(int pos)
+{
+    // position is from the top
+    // idx is from bottom (0)
+
+    int x = -1;
+    int idx = top - pos + 1;
+
+    if (idx < 0)
+        std::cout << "invalid position\n";
+    else
+        x = s[idx];
+
+    return x;
+}
+
 
 int main()
 {
     Stack a(5);
 
     a.push(1);
+    a.push(3);
+    a.push(5);
+    a.push(10);
+    a.push(16);
     a.disp();
     a.pop();
     a.disp();
+
+    std::cout << "element in 2nd position: " << a.peek(2) << "\n";
 
     return 0;
 }

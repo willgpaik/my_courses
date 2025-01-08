@@ -102,6 +102,14 @@ int Stack::peek(int pos)
     return x;
 }
 
+int Stack::stackTop()
+{
+    if (top == -1)
+        return -1;
+    else
+        return s[top];
+}
+
 
 int main()
 {
@@ -117,6 +125,7 @@ int main()
     a.disp();
 
     std::cout << "element in 2nd position: " << a.peek(2) << "\n";
+    std::cout << "top element: " << a.stackTop() << "\n";
 
     return 0;
 }

@@ -126,6 +126,17 @@ int main()
 
     std::cout << "element in 2nd position: " << a.peek(2) << "\n";
     std::cout << "top element: " << a.stackTop() << "\n";
+    
+    if (a.isEmpty())
+        std::cout << "stack is empty\n";
+    else
+        std::cout << "stack is not empty\n";
+
+    if (a.isFull())
+        std::cout << "stack is full\n";
+    else
+        std::cout << "stack is not full\n";
+
 
     return 0;
 }

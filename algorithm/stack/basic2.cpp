@@ -120,6 +120,7 @@ int main()
     a.push(5);
     a.push(10);
     a.push(16);
+    a.push(23);
     a.disp();
     a.pop();
     a.disp();

@@ -52,7 +52,7 @@ void Stack::disp()
         std::cout << "stack is empty\n";
     else
     {
-        for (int i = 0; i <= top; i++)
+        for (int i = top; i >= 0; i--)
             std::cout << s[i] << " ";
 
         std::cout << "\n";

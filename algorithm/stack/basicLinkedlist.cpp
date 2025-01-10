@@ -21,7 +21,13 @@ public:
 
     ~Stack()
     {
-        delete top;
+        Ndoe *p = top;
+        while (top)
+        {
+            top = top->next;
+            delete p;
+            p = top;
+        }
     }
 
     bool isEmpty();

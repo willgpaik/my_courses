@@ -1,5 +1,6 @@
 // parenthesis matching
 #include <iostream>
+#include <cstring>
 
 class Node
 {
@@ -21,7 +22,13 @@ public:
 
     ~Stack()
     {
-        delete top;
+        Node *p = top;
+        while (top)
+        {
+            top = top->next;
+            delete p;
+            p = top;
+        }
     }
 
     bool isEmpty();
@@ -31,8 +38,6 @@ public:
     char peek(int pos);
     void disp();
     char stackTop();
-
-    bool isBalance();
 };
 
 bool Stack::isEmpty()
@@ -125,33 +130,37 @@ char Stack::stackTop()
         return top->data;
 }
 
+bool isBalanced(char *exp)
+{
+    Stack st;
+
+    for (int i = 0; i < strlen(exp); i++)
+    {
+        if (exp[i] == '(')
+            st.push(exp[i]);
+        else if (exp[i] == ')')
+        {
+            if (st.isEmpty())
+                return false;
+            else
+                st.pop();
+        }
+    }
+
+    return st.isEmpty() ? true:false;
+}
+
 
 int main()
 {
-    Stack a;
-
-    a.push(1);
-    a.push(3);
-    a.push(5);
-    a.push(10);
-    a.push(16);
-    a.push(23);
-    a.disp();
-    a.pop();
-    a.disp();
-
-    std::cout << "element in 2nd position: " << a.peek(2) << "\n";
-    std::cout << "top element: " << a.stackTop() << "\n";
-
-    if (a.isEmpty())
-        std::cout << "stack is empty\n";
-    else
-        std::cout << "stack is not empty\n";
-
-    if (a.isFull())
-        std::cout << "stack is full\n";
-    else
-        std::cout << "stack is not full\n"; 
+    char E[] = "((a+b)*(c-d))";
+    std::cout << isBalanced(E) << "\n";
+ 
+    char F[] = "((a+b)*(c-d)))";
+    std::cout << isBalanced(F) << "\n";
+ 
+    char G[] = "(((a+b)*(c-d))";
+    std::cout << isBalanced(G) << "\n";
 
     return 0;
 }

@@ -147,12 +147,10 @@ bool isBalanced(char *exp)
         }
         else if (exp[i] == ')' || exp[i] == ']' || exp[i] == '}')
         {
-            if (st.isEmpty())
+            if (st.isEmpty() || st.stackTop() != exp[i])
                 return false;
             else if (st.stackTop() == exp[i])
                 st.pop();
-            else
-                return false;
         }
     }
 

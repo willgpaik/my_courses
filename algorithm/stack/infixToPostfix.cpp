@@ -92,8 +92,28 @@ char Stack::pop()
     return x;
 }
 
+bool isOperand(char x)
+{
+    if (x == '+' || x == '-' || x == '*' || x == '/')
+        return true;
+    else 
+        return false;
+}
+
+int precedence(char x)
+{
+    if (x == '+' || x == '-')
+        return 1;
+    else if (x == '*' || x == '/')
+        return 2;
+    
+    return 0;
+}
+
 char *toPostfix(char *infix)
 {
+    Stack st;
+
     char *postfix;
 
 

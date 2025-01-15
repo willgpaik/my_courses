@@ -138,7 +138,7 @@ int outPrecedence(char x)
     else if (x == '(')
         return 0;
     else if (x == ')')
-        return 0;
+        return -1;
     
     return 0;
 }
@@ -151,6 +151,7 @@ char *toPostfix(char *infix)
 
     int i, j;
     i = j = 0;
+    
     while (infix[i] != '\0')
     {
         char c = infix[i];
@@ -159,15 +160,30 @@ char *toPostfix(char *infix)
             postfix[j++] = infix[i++];
         else
         {
-            if (outPrecedence(c) > inPrecedence(st.stackTop()))
+            if (st.isEmpty() || outPrecedence(c) > inPrecedence(st.stackTop()))
                 st.push(infix[i++]);
             else
-                postfix[j++] = st.pop();
+            {
+                char tmp = st.pop();
+                if (outPrecedence(tmp) > 0)
+                    postfix[j++] = tmp;
+            }
+            /*else if (outPrecedence(c) == inPrecedence(st.stackTop()))
+                st.push(infix[i++]);
+            else
+            {
+                postfix[j++] = st.stackTop();
+                st.pop();
+            }*/
         }
     }
-    
+ 
     while (! st.isEmpty())
-        postfix[j++] = st.pop();
+    {
+        char tmp = st.pop();
+        if (outPrecedence(tmp) > 0)
+            postfix[j++] = tmp;
+    }
 
     postfix[j] = '\0';
 

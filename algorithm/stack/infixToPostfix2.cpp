@@ -114,22 +114,6 @@ bool isOperand(char x)
 int inPrecedence(char x)
 {
     if (x == '+' || x == '-')
-        return 1;
-    else if (x == '*' || x == '/')
-        return 3;
-    else if (x == '^')
-        return 6;
-    else if (x == '(')
-        return 7;
-    else if (x == ')')
-        return 0;
-    
-    return 0;
-}
-
-int outPrecedence(char x)
-{
-    if (x == '+' || x == '-')
         return 2;
     else if (x == '*' || x == '/')
         return 4;
@@ -139,6 +123,22 @@ int outPrecedence(char x)
         return 0;
     else if (x == ')')
         return -1;
+    
+    return 0;
+}
+
+int outPrecedence(char x)
+{
+    if (x == '+' || x == '-')
+        return 1;
+    else if (x == '*' || x == '/')
+        return 3;
+    else if (x == '^')
+        return 6;
+    else if (x == '(')
+        return 7;
+    else if (x == ')')
+        return 0;
     
     return 0;
 }
@@ -154,34 +154,27 @@ char *toPostfix(char *infix)
     
     while (infix[i] != '\0')
     {
-        char c = infix[i];
+        char c = infix[i++];
 
         if (isOperand(c))
-            postfix[j++] = infix[i++];
+            postfix[j++] = c;
         else
         {
             if (st.isEmpty() || outPrecedence(c) > inPrecedence(st.stackTop()))
-                st.push(infix[i++]);
+                st.push(c);
             else
             {
                 char tmp = st.pop();
-                if (outPrecedence(tmp) > 0)
+                if (inPrecedence(tmp) > 0)
                     postfix[j++] = tmp;
             }
-            /*else if (outPrecedence(c) == inPrecedence(st.stackTop()))
-                st.push(infix[i++]);
-            else
-            {
-                postfix[j++] = st.stackTop();
-                st.pop();
-            }*/
         }
     }
  
     while (! st.isEmpty())
     {
         char tmp = st.pop();
-        if (outPrecedence(tmp) > 0)
+        if (inPrecedence(tmp) > 0)
             postfix[j++] = tmp;
     }
 

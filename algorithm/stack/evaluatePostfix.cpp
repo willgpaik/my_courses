@@ -1,6 +1,7 @@
 // evaluation of the postfix equation
 #include <iostream>
 #include <cstring>
+#include <cmath>
 
 class Node
 {
@@ -183,6 +184,50 @@ char *toPostfix(char *infix)
     return postfix;
 }
 
+int eval(char *postfix)
+{
+    Stack st;
+    int x1, x2, res;
+
+    for (int i = 0; postfix[i] != '\0'; i++)
+    {
+        char tmp = postfix[i];
+        if (isOperand(c))
+            st.push(c);
+        else
+        {
+            x2 = st.pop();
+            x1 = st.pop();
+
+            switch(c)
+            {
+                case '+':
+                    res = x1 + x2;
+                    st.push(res);
+                    break;
+                case '-':
+                    res = x1 - x2;
+                    st.push(res);
+                    break;
+                case '*':
+                    res = x1 * x2;
+                    st.push(res);
+                    break;
+                case '/':
+                    res = x1 / x2;
+                    st.push(res);
+                    break;
+                case '^':
+                    res = std::pow(x1, x2);
+                    st.push(res);
+                    break;
+            }
+        }
+    }
+
+    return st.pop();
+}
+
 
 int main()
 {
@@ -190,6 +235,10 @@ int main()
     char *postfix = toPostfix(infix);
 
     std::cout << postfix << "\n";
+
+    int sol = eval(postfix);
+
+    std::cout << sol << "\n";
 
     return 0;
 }

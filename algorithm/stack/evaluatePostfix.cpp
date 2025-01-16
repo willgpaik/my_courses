@@ -199,7 +199,7 @@ int eval(char *postfix)
             x2 = st.pop();
             x1 = st.pop();
 
-            switch(c)
+            switch(tmp)
             {
                 case '+':
                     res = x1 + x2;

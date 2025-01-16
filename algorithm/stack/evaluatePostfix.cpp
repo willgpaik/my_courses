@@ -192,8 +192,8 @@ int eval(char *postfix)
     for (int i = 0; postfix[i] != '\0'; i++)
     {
         char tmp = postfix[i];
-        if (isOperand(c))
-            st.push(c);
+        if (isOperand(tmp))
+            st.push(tmp);
         else
         {
             x2 = st.pop();

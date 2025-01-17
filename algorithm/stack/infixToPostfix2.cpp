@@ -154,17 +154,17 @@ char *toPostfix(char *infix)
     
     while (infix[i] != '\0')
     {
-        char c = infix[i++];
+        char c = infix[i];
 
         if (isOperand(c))
-            postfix[j++] = c;
+            postfix[j++] = infix[i++];
         else
         {
             if (st.isEmpty() || outPrecedence(c) > inPrecedence(st.stackTop()))
-                st.push(c);
+                st.push(infix[i++]);
             else
             {
-                char tmp = st.pop();
+                char tmp = st.pop();                
                 if (inPrecedence(tmp) > 0)
                     postfix[j++] = tmp;
             }
@@ -186,7 +186,8 @@ char *toPostfix(char *infix)
 
 int main()
 {
-    char infix[] = "((a+b)*c)-d^e^f";
+    //char infix[] = "((a+b)*c)-d^e^f";
+    char infix[] = "3*5+6/2-4"; // -> 35*62/+4-
     char *postfix = toPostfix(infix);
 
     std::cout << postfix << "\n";

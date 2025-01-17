@@ -193,7 +193,7 @@ int eval(char *postfix)
     {
         char tmp = postfix[i];
         if (isOperand(tmp))
-            st.push(tmp);
+            st.push(tmp - '0');
         else
         {
             x2 = st.pop();
@@ -236,6 +236,7 @@ int main()
 
     std::cout << postfix << "\n";
 
+    //char postfix[] = "234*+82/-";
     int sol = eval(postfix);
 
     std::cout << sol << "\n";

@@ -157,7 +157,8 @@ char *toPostfix(char *infix)
 
 int main()
 {
-    char infix[] = "a+b*c-d/e";
+    //char infix[] = "a+b*c-d/e";
+    char infix[] = "3*5+6/2-4";
     char *postfix = toPostfix(infix);
 
     std::cout << postfix << "\n";

@@ -4,19 +4,20 @@
 #include <iostream>
 
 template <class T1>
-class QNode
+class Node
 {
 public:
     T1 data;
-    QNode *next;
+    Node *left;
+    Node *right;
 };
 
 template <class T2>
 class Queue
 {
 private:
-    QNode<T2> *front;
-    QNode<T2> *rear;
+    Node<T2> *front;
+    Node<T2> *rear;
 
 public:
     Queue()

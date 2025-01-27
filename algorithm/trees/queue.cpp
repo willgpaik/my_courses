@@ -45,7 +45,7 @@ void Queue<T2>::enQueue(T2 x)
 template <class T2>
 T2 Queue<T2>::deQueue()
 {
-    T2 x = -1;
+    T2 x = NULL;
 
     if (isEmpty())
         std::cout << "queue is empty\n";

@@ -1,5 +1,6 @@
 // creating a binary tree
 #include <iostream>
+#include "queue.hpp"
 
 class Node
 {

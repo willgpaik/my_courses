@@ -3,19 +3,20 @@
 
 #include <iostream>
 
-template <typename T>
+template <class T1>
 class QNode
 {
 public:
-    T data;
+    T1 data;
     QNode *next;
 };
 
+template <class T2>
 class Queue
 {
 private:
-    QNode *front;
-    QNode *rear;
+    QNode<T2> *front;
+    QNode<T2> *rear;
 
 public:
     Queue()
@@ -37,8 +38,8 @@ public:
 
     bool isEmpty();
     bool isFull();
-    void enQueue(T x);
-    T deQueue();
+    void enQueue(T2 x);
+    T2 deQueue();
 }
 
 

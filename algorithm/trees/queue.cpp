@@ -1,6 +1,7 @@
 #include "queue.hpp"
 
-bool Queue::isEmpty()
+template <class T2>
+bool Queue<T2>::isEmpty()
 {
     if (front == rear)
         return true;
@@ -8,9 +9,10 @@ bool Queue::isEmpty()
         return false;
 }
 
-bool Queue::isFull()
+template <class T2>
+bool Queue<T2>::isFull()
 {
-    Node *t = new Node;
+    Node<T2> *t = new Node<T2>;
 
     if (t == NULL)
         return true;
@@ -18,13 +20,14 @@ bool Queue::isFull()
         return false;
 }
 
-void Queue::enQueue(T x)
+template <class T2>
+void Queue<T2>::enQueue(T2 x)
 {
     if (isFull())
         std::cout << "queue is full\n";
     else
     {
-        Node *t = new Node;
+        Node<T2> *t = new Node<T2>;
 
         t->data = x;
         t->next = NULL;
@@ -39,15 +42,16 @@ void Queue::enQueue(T x)
     } 
 }
 
-T Queue::deQueue()
+template <class T2>
+T2 Queue<T2>::deQueue()
 {
-    T x = -1;
+    T2 x = -1;
 
     if (isEmpty())
         std::cout << "queue is empty\n";
     else
     {
-        Node *p = front;
+        Node<T2> *p = front;
         front = front->next;
         x = p->data;
 

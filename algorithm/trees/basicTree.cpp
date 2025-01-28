@@ -17,7 +17,7 @@ public:
 
     Tree()
     {
-        root = nullptr;
+        root = NULL;
     }
 
     void create();
@@ -25,7 +25,7 @@ public:
     void postorder(Node *p);
     void inorder(Node *p);
     void levelorder(Node *p);
-    void height(Node *root);
+    int height(Node *root);
 };
 
 void Tree::create()
@@ -39,7 +39,7 @@ void Tree::create()
     std::cin >> x;
     root = new Node;
     root->data = x;
-    root->left = root->right = nullptr;
+    root->left = root->right = NULL;
     q.enQueue(root);
 
     while (! q.isEmpty())
@@ -53,7 +53,7 @@ void Tree::create()
         {
             t = new Node;
             t->data = x;
-            t->left = t->right = nullptr;
+            t->left = t->right = NULL;
             p->left = t;
             
             q.enQueue(t);
@@ -66,7 +66,7 @@ void Tree::create()
         {
             t = new Node;
             t->data = x;
-            t->left = t->right = nullptr;
+            t->left = t->right = NULL;
             p->right = t;
             
             q.enQueue(t);
@@ -74,11 +74,88 @@ void Tree::create()
     }
 }
 
+void Tree::preorder(Node *p)
+{
+    if (p)
+    {
+        std::cout << p->data << " ";
+        preorder(p->left);
+        preorder(p->right);
+    } 
+}
+
+void Tree::postorder(Node *p)
+{
+    if (p)
+    {
+        postorder(p->left);
+        postorder(p->right);
+        std::cout << p->data << " ";
+    }
+}
+
+void Tree::inorder(Node *p)
+{
+    if (p)
+    {
+        inorder(p->left);
+        std::cout << p->data << " ";
+        inorder(p->right);
+    }
+}
+
+void Tree::levelorder(Node *p)
+{
+    Queue<Node*> q;
+
+    std::cout << p->data << " ";
+    q.enQueue(p);
+
+    while (! q.isEmpty())
+    {
+        p = q.deQueue();
+
+        if (p->left)
+        {
+            std::cout << p->left->data << " ";
+            q.enQueue(p->left);
+        }
+
+        if (p->right)
+        {
+            std::cout << p->right->data << " ";
+            q.enQueue(p->right);
+        }
+    }
+}
+
+int Tree::height(Node *root)
+{
+    int x, y;
+    x = y = 0;
+
+    if (root = 0)
+        return 0;
+
+    x = height(root->left);
+    x = height(root->right);
+
+    if (x > y)
+        return x+1;
+    else
+        return y+1;
+}
+
 
 int main()
 {
     Tree t;
     t.create();
+
+    t.preorder(t.root);
+    std::cout << "\n";
+    t.inorder(t.root);
+    std::cout << "\n";
 
     return 0;
 }

@@ -1,9 +1,12 @@
+#ifndef MY_QUEUE_TPP
+#define MY_QUEUE_TPP
+
 #include "queue.hpp"
 
 template <class T2>
 bool Queue<T2>::isEmpty()
 {
-    if (front == rear)
+    if (front == nullptr)
         return true;
     else
         return false;
@@ -12,7 +15,7 @@ bool Queue<T2>::isEmpty()
 template <class T2>
 bool Queue<T2>::isFull()
 {
-    Node<T2> *t = new Node<T2>;
+    QNode<T2> *t = new QNode<T2>;
 
     if (t == NULL)
         return true;
@@ -27,7 +30,7 @@ void Queue<T2>::enQueue(T2 x)
         std::cout << "queue is full\n";
     else
     {
-        Node<T2> *t = new Node<T2>;
+        QNode<T2> *t = new QNode<T2>;
 
         t->data = x;
         t->next = NULL;
@@ -45,13 +48,13 @@ void Queue<T2>::enQueue(T2 x)
 template <class T2>
 T2 Queue<T2>::deQueue()
 {
-    T2 x = NULL;
+    T2 x = nullptr;
 
     if (isEmpty())
         std::cout << "queue is empty\n";
     else
     {
-        Node<T2> *p = front;
+        QNode<T2> *p = front;
         front = front->next;
         x = p->data;
 
@@ -60,3 +63,6 @@ T2 Queue<T2>::deQueue()
 
     return x;
 }
+
+
+#endif

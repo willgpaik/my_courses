@@ -64,6 +64,15 @@ void Tree::create()
 
     std::cout << "enter root value: ";
     std::cin >> x;
+
+    while (std::cin.fail())
+    {
+        std::cin.clear();
+        std::cout << "enter left child of " << p->data << ": ";
+        std::cin >> x;
+    }
+
+
     root = new Node;
     root->data = x;
     root->left = root->right = NULL;
@@ -75,6 +84,13 @@ void Tree::create()
 
         std::cout << "enter left child of " << p->data << ": ";
         std::cin >> x;
+
+        while (std::cin.fail())
+        {
+            std::cin.clear();
+            std::cout << "enter left child of " << p->data << ": ";
+            std::cin >> x;
+        }
 
         if (x != -1)
         {
@@ -88,6 +104,14 @@ void Tree::create()
 
         std::cout << "enter right child of " << p->data << ": ";
         std::cin >> x;
+
+        while (std::cin.fail())
+        {
+            std::cin.clear();
+            std::cout << "enter left child of " << p->data << ": ";
+            std::cin >> x;
+        }
+
 
         if (x != -1)
         {

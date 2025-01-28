@@ -12,8 +12,11 @@ public:
 
 class Tree
 {
-public:
+private:
     Node *root;
+
+public:
+    //Node *root;
 
     Tree()
     {
@@ -21,10 +24,34 @@ public:
     }
 
     void create();
+    void preorder()
+    {
+        preorder(root);
+    }
     void preorder(Node *p);
+
+    void postorder()
+    {
+        postorder(root);
+    }
     void postorder(Node *p);
+
+    void inorder()
+    {
+        inorder(root);
+    }
     void inorder(Node *p);
+
+    void levelorder()
+    {
+        levelorder(root);
+    }
     void levelorder(Node *p);
+
+    int height()
+    {
+        return height(root);
+    }
     int height(Node *root);
 };
 
@@ -134,7 +161,7 @@ int Tree::height(Node *root)
     int x, y;
     x = y = 0;
 
-    if (root = 0)
+    if (root == 0)
         return 0;
 
     x = height(root->left);
@@ -152,10 +179,16 @@ int main()
     Tree t;
     t.create();
 
-    t.preorder(t.root);
+    t.preorder();
     std::cout << "\n";
-    t.inorder(t.root);
+    t.inorder();
     std::cout << "\n";
+    t.postorder();
+    std::cout << "\n";
+    t.levelorder();
+    std::cout << "\n";
+
+    std::cout << "height of tree: " << t.height() << "\n";
 
     return 0;
 }

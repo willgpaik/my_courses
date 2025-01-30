@@ -1,6 +1,7 @@
 // iterative traversal
 #include <iostream>
 #include "queue.hpp"
+#include "stack.hpp"
 
 class Node
 {
@@ -56,9 +57,21 @@ public:
 
     void iPreorder(Node *p)
     {
-        void iPreorder(Node *p);
+        iPreorder(root);
     }
     void iPreorder(Node *p);
+
+    void iInorder()
+    {
+        iInorder(root);
+    }
+    iInorder(Node *p);
+
+    void iPostorder()
+    {
+        iPostorder(root);
+    }
+    iPostorder(Node *p);
 };
 
 void Tree::create()

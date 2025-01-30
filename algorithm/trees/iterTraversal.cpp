@@ -55,7 +55,7 @@ public:
     }
     int height(Node *root);
 
-    void iPreorder(Node *p)
+    void iPreorder()
     {
         iPreorder(root);
     }
@@ -65,13 +65,13 @@ public:
     {
         iInorder(root);
     }
-    iInorder(Node *p);
+    void iInorder(Node *p);
 
     void iPostorder()
     {
         iPostorder(root);
     }
-    iPostorder(Node *p);
+    void iPostorder(Node *p);
 };
 
 void Tree::create()
@@ -218,6 +218,25 @@ int Tree::height(Node *root)
 
 void Tree::iPreorder(Node *p)
 {
+    Stack<Node*> stk;
+
+    while (p != nullptr || ! stk.isEmpty())
+    {
+        if (p != nullptr)
+        {
+            std::cout << p->data << " ";
+            stk.push(p);
+            p = p->left;
+        }
+        else
+        {
+            p = stk.stackTop();
+            stk.pop();
+            p = p->right;
+        }
+    }
+
+    std::cout << "\n";
 }
 
 
@@ -236,6 +255,8 @@ int main()
     std::cout << "\n";
 
     std::cout << "height of tree: " << t.height() << "\n";
+
+    t.iPreorder();
 
     return 0;
 }

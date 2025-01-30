@@ -4,7 +4,7 @@
 #include "stack.hpp"
 
 template <class T2>
-bool Stack::isEmpty()
+bool Stack<T2>::isEmpty()
 {
     if (top == NULL)
         return true;
@@ -13,9 +13,9 @@ bool Stack::isEmpty()
 }
 
 template <class T2>
-bool Stack::isFull()
+bool Stack<T2>::isFull()
 {
-    Node<T2> *t = new Node<T2>;
+    SNode<T2> *t = new SNode<T2>;
     
     if (t == NULL)
     {
@@ -30,13 +30,13 @@ bool Stack::isFull()
 }
 
 template <class T2>
-void Stack::push(T2 x)
+void Stack<T2>::push(T2 x)
 {
     if (isFull())
         std::cout << "stack is full\n";
     else
     {
-        Node<T2> *t = new Node <T2>;
+        SNode<T2> *t = new SNode <T2>;
         t->data = x;
         t->next = top;
         top = t;
@@ -44,9 +44,9 @@ void Stack::push(T2 x)
 }
 
 template <class T2>
-T2 Stack::pop()
+T2 Stack<T2>::pop()
 {
-    Node<T2> *p;
+    SNode<T2> *p;
     T2 x = NULL;
 
     if (isEmpty())
@@ -64,9 +64,9 @@ T2 Stack::pop()
 }
 
 template <class T2>
-T2 Stack::peek(T2 pos)
+T2 Stack<T2>::peek(T2 pos)
 {
-    Node<T2> *p = top;
+    SNode<T2> *p = top;
     while (p)
     {
         std::cout << p->data << " ";
@@ -78,10 +78,10 @@ T2 Stack::peek(T2 pos)
 
 
 template <class T2>
-T2 Stack::stackTop()
+T2 Stack<T2>::stackTop()
 {
     if (isEmpty())
-        return -1;
+        return NULL;
     else
         return top->data;
 }

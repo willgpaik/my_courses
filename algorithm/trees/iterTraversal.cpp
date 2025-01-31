@@ -239,24 +239,50 @@ void Tree::iPreorder(Node *p)
     std::cout << "\n";
 }
 
+void Tree::iInorder(Node *p)
+{
+    Stack<Node*> stk;
+
+    while (p != nullptr || ! stk.isEmpty())
+    {
+        if (p != nullptr)
+        {
+            stk.push(p);
+            p = p->left;
+        }
+        else
+        {
+            p = stk.pop();
+            std::cout << p->data << " ";
+            p = p->right;
+        }
+    }
+
+    std::cout << "\n";
+}
+
 
 int main()
 {
     Tree t;
     t.create();
 
+    std::cout << "preorder:\n";
     t.preorder();
-    std::cout << "\n";
+    std::cout << "\ninorder\n";
     t.inorder();
-    std::cout << "\n";
+    std::cout << "\npostorder\n";
     t.postorder();
-    std::cout << "\n";
+    std::cout << "\nlevelorder\n";
     t.levelorder();
     std::cout << "\n";
 
     std::cout << "height of tree: " << t.height() << "\n";
 
+    std::cout << "iterative preorder\n";
     t.iPreorder();
+    std::cout << "iterative inorder\n";
+    t.iInorder();
 
     return 0;
 }

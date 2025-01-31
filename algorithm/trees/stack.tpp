@@ -2,6 +2,7 @@
 #define MY_STACK_TPP
 
 #include "stack.hpp"
+#include <type_traits>
 
 template <class T2>
 bool Stack<T2>::isEmpty()
@@ -47,7 +48,27 @@ template <class T2>
 T2 Stack<T2>::pop()
 {
     SNode<T2> *p;
-    T2 x = NULL;
+
+    /*// Define x with the correct type, depending on whether T2 is a pointer or not
+    typename std::conditional<std::is_pointer<T2>::value, T2, int>::type x;
+
+    if constexpr (std::is_pointer<T2>::value) {
+        // If T2 is a pointer, initialize to nullptr
+        x = nullptr;
+    } else {
+        // If T2 is not a pointer, initialize to -1
+        x = -1;
+    }*/
+
+    
+    T2 x;
+    if constexpr (std::is_pointer<T2>::value) {
+        // If T2 is a pointer, initialize x to nullptr
+        x = nullptr;
+    } else {
+        // If T2 is not a pointer, initialize x to -1
+        x = static_cast<T2>(-1); // This ensures that x has type T2 (even if T2 is int or something else)
+    }
 
     if (isEmpty())
         std::cout << "stack is empty\n";

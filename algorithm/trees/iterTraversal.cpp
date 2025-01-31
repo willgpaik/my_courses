@@ -261,6 +261,38 @@ void Tree::iInorder(Node *p)
     std::cout << "\n";
 }
 
+void Tree::iPostorder(Node *p)
+{
+    Stack<long int> stk;
+    long int tmp;
+
+    while (p != nullptr || ! stk.isEmpty())
+    {
+        if (p != nullptr)
+        {
+            stk.push((long int) p);
+            p = p->left;
+        }
+        else
+        {
+            tmp = stk.pop();
+
+            if (tmp > 0)
+            {
+                stk.push(-tmp);
+                p = ((Node*) tmp)->right;
+            }
+            else
+            {
+                std::cout << ((Node*) -tmp)->data << " ";
+                p = nullptr;
+            }
+        }
+    }
+
+    std::cout << "\n";
+}
+
 
 int main()
 {
@@ -283,6 +315,8 @@ int main()
     t.iPreorder();
     std::cout << "iterative inorder\n";
     t.iInorder();
+    std::cout << "iterative postorder\n";
+    t.iPostorder();
 
     return 0;
 }

@@ -43,12 +43,6 @@ public:
     }
     void inorder(Node *p);
 
-    void levelorder()
-    {
-        levelorder(root);
-    }
-    void levelorder(Node *p);
-
     int height()
     {
         return height(root);
@@ -75,7 +69,7 @@ public:
 
     void levelorder()
     {
-        levelorder(Node *p);
+        levelorder(root);
     }
     void levelorder(Node *p);
 };
@@ -180,31 +174,6 @@ void Tree::inorder(Node *p)
     }
 }
 
-void Tree::levelorder(Node *p)
-{
-    Queue<Node*> q;
-
-    std::cout << p->data << " ";
-    q.enQueue(p);
-
-    while (! q.isEmpty())
-    {
-        p = q.deQueue();
-
-        if (p->left)
-        {
-            std::cout << p->left->data << " ";
-            q.enQueue(p->left);
-        }
-
-        if (p->right)
-        {
-            std::cout << p->right->data << " ";
-            q.enQueue(p->right);
-        }
-    }
-}
-
 int Tree::height(Node *root)
 {
     int x, y;
@@ -299,6 +268,33 @@ void Tree::iPostorder(Node *p)
     std::cout << "\n";
 }
 
+void Tree::levelorder(Node *p)
+{
+    Queue<Node*> q;
+
+    std::cout << p->data << " ";
+    q.enQueue(p);
+
+    while (! q.isEmpty())
+    {
+        p = q.deQueue();
+
+        if (p->left)
+        {
+            std::cout << p->left->data << " ";
+            q.enQueue(p->left);
+        }
+
+        if (p->right)
+        {
+            std::cout << p->right->data << " ";
+            q.enQueue(p->right);
+        }
+    }
+
+    std::cout << "\n";
+}
+
 
 int main()
 {
@@ -323,6 +319,9 @@ int main()
     t.iInorder();
     std::cout << "iterative postorder\n";
     t.iPostorder();
+
+    std::cout << "\nlevelorder\n";
+    t.levelorder();
 
     return 0;
 }

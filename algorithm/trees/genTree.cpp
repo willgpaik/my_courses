@@ -73,7 +73,7 @@ public:
     }
     void iPostorder(Node *p);
 
-    Node *genFromTree(int *inorder, int *preorder, int inStart, int inEnd);
+    Node *genTree(int *inorder, int *preorder, int inStart, int inEnd);
 };
 
 void Tree::create()
@@ -295,35 +295,50 @@ void Tree::iPostorder(Node *p)
     std::cout << "\n";
 }
 
-Node *genFromTree(int *inorder, int *preorder, int inStart, int inEnd)
+int searchInorder(int *inorder, int inStart, int inEnd, int data)
 {
+    for (int i = inStart; i <= inEnd; i++)
+    {
+        if (inorder[i] == data)
+            return i;
+    }
 
+    return -1;
+}
+
+Node *Tree::genTree(int *inorder, int *preorder, int inStart, int inEnd)
+{
+    static int preIdx = 0;
+
+    if (inStart > inEnd)
+        return nullptr;
+
+    Node *node = new Node;
+    node->data = preorder[preIdx++];
+
+    if (inStart == inEnd)
+        return node;
+
+    int inIdx = searchInorder(inorder, inStart, inEnd, node->data);
+
+    node->left = genTree(inorder, preorder, inStart, inIdx-1);
+    node->right = genTree(inorder, preorder, inIdx+1, inEnd);
+
+    return node;
 }
 
 
 int main()
 {
-    Tree t;
-    t.create();
+    Tree tr;
 
-    std::cout << "preorder:\n";
-    t.preorder();
-    std::cout << "\ninorder\n";
-    t.inorder();
-    std::cout << "\npostorder\n";
-    t.postorder();
-    std::cout << "\nlevelorder\n";
-    t.levelorder();
+    int preorder[] = {4, 7, 9, 6, 3, 2, 5, 8, 1};
+    int inorder[] = {7, 6, 9, 3, 4, 5, 8, 2, 1};
+
+    Node *t = tr.genTree(inorder, preorder, 0, sizeof(inorder)/sizeof(int)-1);
+
+    tr.preorder(t);
     std::cout << "\n";
-
-    std::cout << "height of tree: " << t.height() << "\n";
-
-    std::cout << "iterative preorder\n";
-    t.iPreorder();
-    std::cout << "iterative inorder\n";
-    t.iInorder();
-    std::cout << "iterative postorder\n";
-    t.iPostorder();
 
     return 0;
 }

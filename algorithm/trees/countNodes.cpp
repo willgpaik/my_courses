@@ -92,6 +92,12 @@ public:
         return degTwoNodeCnt(root);
     }
     int degTwoNodeCnt(Node *p);
+
+    int fun()
+    {
+        return fun(root);
+    }
+    int fun(Node *p);
 };
 
 void Tree::create()
@@ -347,6 +353,8 @@ Node *Tree::genTree(int *inorder, int *preorder, int inStart, int inEnd)
 
 int Tree::countNodes(Node *p)
 {
+    // count number of nodes
+
     int x, y;
 
     if (p != NULL)
@@ -362,6 +370,8 @@ int Tree::countNodes(Node *p)
 
 int Tree::sumNodes(Node *p)
 {
+    // sum of all node values
+
     int x, y;
 
     if (p != NULL)
@@ -377,6 +387,8 @@ int Tree::sumNodes(Node *p)
 
 int Tree::degTwoNodeCnt(Node *p)
 {
+    // count number of nodes with degree 2 (have both left and right children)
+
     int x, y;
 
     if (p != NULL)
@@ -388,6 +400,26 @@ int Tree::degTwoNodeCnt(Node *p)
             return x + y + 1;
         else
             return x + y;
+    }
+
+    return 0;
+}
+
+int Tree::fun(Node *p)
+{
+    // level of the tree
+
+    int x, y;
+
+    if (p != NULL)
+    {
+        x = fun(p->left);
+        y = fun(p->right);
+
+        if (x > y)
+            return x + 1;
+        else
+            return y + 1;
     }
 
     return 0;
@@ -409,6 +441,8 @@ int main()
     std::cout << "count: " << tr.countNodes(t) << "\n";
     std::cout << "sum of nodes: " << tr.sumNodes(t) << "\n";
     std::cout << "degree 2 nodes count: " << tr.degTwoNodeCnt(t) << "\n";
+    std::cout << "fun: " << tr.fun(t) << "\n";
+    std::cout << "height: " << tr.height(t) << "\n";
 
     return 0;
 }

@@ -75,7 +75,17 @@ public:
 
     Node *genTree(int *inorder, int *preorder, int inStart, int inEnd);
 
+    int countNodes()
+    {
+        return countNodes(root);
+    }
     int countNodes(Node *p);
+
+    int sumNodes()
+    {
+        return sumNodes(root);
+    }
+    int sumNodes(Node *p);
 };
 
 void Tree::create()
@@ -329,6 +339,36 @@ Node *Tree::genTree(int *inorder, int *preorder, int inStart, int inEnd)
     return node;
 }
 
+int Tree::countNodes(Node *p)
+{
+    int x, y;
+
+    if (p != NULL)
+    {
+        x = countNodes(p->left);
+        y = countNodes(p->right);
+
+        return x + y + 1;
+    }
+
+    return 0;
+}
+
+int Tree::sumNodes(Node *p)
+{
+    int x, y;
+
+    if (p != NULL)
+    {
+        x = sumNodes(p->left);
+        y = sumNodes(p->right);
+
+        return x + y + p->data;
+    }
+
+    return 0;
+}
+
 
 int main()
 {
@@ -341,6 +381,8 @@ int main()
 
     tr.preorder(t);
     std::cout << "\n";
+
+    std::cout << "count: " << tr.countNodes(t) << "\n";
 
     return 0;
 }

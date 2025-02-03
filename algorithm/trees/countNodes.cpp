@@ -86,6 +86,12 @@ public:
         return sumNodes(root);
     }
     int sumNodes(Node *p);
+
+    int degTwoNodeCnt()
+    {
+        return degTwoNodeCnt(root);
+    }
+    int degTwoNodeCnt(Node *p);
 };
 
 void Tree::create()
@@ -369,6 +375,24 @@ int Tree::sumNodes(Node *p)
     return 0;
 }
 
+int Tree::degTwoNodeCnt(Node *p)
+{
+    int x, y;
+
+    if (p != NULL)
+    {
+        x = degTwoNodeCnt(p->left);
+        y = degTwoNodeCnt(p->right);
+
+        if (p->left && p->right)
+            return x + y + 1;
+        else
+            return x + y;
+    }
+
+    return 0;
+}
+
 
 int main()
 {
@@ -383,6 +407,8 @@ int main()
     std::cout << "\n";
 
     std::cout << "count: " << tr.countNodes(t) << "\n";
+    std::cout << "sum of nodes: " << tr.sumNodes(t) << "\n";
+    std::cout << "degree 2 nodes count: " << tr.degTwoNodeCnt(t) << "\n";
 
     return 0;
 }

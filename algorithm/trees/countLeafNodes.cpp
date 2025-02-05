@@ -491,7 +491,8 @@ int Tree::cntDegOne(Node *p)
         y = cntDegOne(p->right);
 
         // if node has only one child
-        if ((p->left && ! p->right) || (! p->left && p->right))
+        //if ((p->left && ! p->right) || (! p->left && p->right))
+        if (p->left != NULL ^ p->right != NULL) // ^ is xor
             return x + y + 1;
         else
             return x + y;

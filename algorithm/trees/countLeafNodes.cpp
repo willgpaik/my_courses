@@ -110,6 +110,12 @@ public:
         return cntHasChild(root);
     }
     int cntHasChild(Node *p);
+
+    int cntDegOne()
+    {
+        return cntDegOne(root);
+    }
+    int cntDegOne(Node *p);
 };
 
 void Tree::create()
@@ -475,6 +481,25 @@ int Tree::cntHasChild(Node *p)
     return 0;
 }
 
+int Tree::cntDegOne(Node *p)
+{
+    int x, y;
+
+    if (p != NULL)
+    {
+        x = cntDegOne(p->left);
+        y = cntDegOne(p->right);
+
+        // if node has only one child
+        if ((p->left && ! p->right) || (! p->left && p->right))
+            return x + y + 1;
+        else
+            return x + y;
+    }
+
+    return 0;
+}
+
 
 int main()
 {
@@ -496,6 +521,7 @@ int main()
 
     std::cout << "num leaf nodes: " << tr.cntLeafNodes(t) << "\n";
     std::cout << "num nodes with at least 1 child: " << tr.cntHasChild(t) << "\n";
+    std::cout << "num deg 1 nodes: " << tr.cntDegOne(t) << "\n";
 
     return 0;
 }

@@ -183,7 +183,7 @@ int Tree::height(Node *root)
         return 0;
 
     x = height(root->left);
-    x = height(root->right);
+    y = height(root->right);
 
     if (x > y)
         return x+1;

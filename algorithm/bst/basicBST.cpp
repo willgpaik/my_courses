@@ -3,6 +3,7 @@
 
 class Node
 {
+ public:
     int data;
     Node *left;
     Node *right;
@@ -42,6 +43,8 @@ void BST::insert(int key)
         p->right = nullptr;
 
         root = p;
+
+        return;
     }
 
     while (t)
@@ -56,6 +59,7 @@ void BST::insert(int key)
             return;
     }
 
+    // t is pointing NULL and r is pointing a node that key needs to be inserted
     p = new Node;
     p->data = key;
     p->left = p->right = nullptr;
@@ -64,6 +68,16 @@ void BST::insert(int key)
         r->left = p;
     else
         r->right = p;
+}
+
+void BST::inorder(Node *p)
+{
+    if (p)
+    {
+        inorder(p->left);
+        std::cout << p->data << " ";
+        inorder(p->right);
+    }
 }
 
 
@@ -80,15 +94,15 @@ int main()
  
     // Inorder traversal
     bst.inorder(bst.getRoot());
-    cout << endl;
+    std::cout << "\n";;
  
-    // Search
+    /*// Search
     Node* tmp = bst.search(2);
-    if (tmp != nullptr){
+    if (tmp != nullptr)
         std::cout << tmp->data << "\n";
-    } else {
+    else
         std::cout << "element not found" << "\n";
-    }
+    */
 
     return 0;
 }

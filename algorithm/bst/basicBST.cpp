@@ -80,6 +80,23 @@ void BST::inorder(Node *p)
     }
 }
 
+Node *BST::search(int key)
+{
+    Node *t = root;
+
+    while(t)
+    {
+        if (key == t->data)
+            return t;
+        else if (key < t->data)
+            t = t->left;
+        else
+            t = t->right;
+    }
+
+    return nullptr;
+}
+
 
 int main()
 {
@@ -96,13 +113,12 @@ int main()
     bst.inorder(bst.getRoot());
     std::cout << "\n";;
  
-    /*// Search
+    // Search
     Node* tmp = bst.search(2);
     if (tmp != nullptr)
         std::cout << tmp->data << "\n";
     else
         std::cout << "element not found" << "\n";
-    */
 
     return 0;
 }

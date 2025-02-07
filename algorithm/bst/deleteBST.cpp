@@ -38,7 +38,10 @@ public:
     Node *rInsert(Node *p, int key);
     Node *rSearch(Node *p, int key);
 
-    Node *del(int key);
+    Node *del(Node *p, int key);
+    int height(Node *p);
+    Node *inPre(Node *p);
+    Node *inSucc(Node *p);
 };
 
 void BST::insert(int key)
@@ -115,7 +118,7 @@ Node *BST::rInsert(Node *p, int key)
 
     Node *t;
 
-    if (p == NULL)
+    if (p == nullptr)
     {
         t = new Node;
         t->data = key;
@@ -144,9 +147,72 @@ Node *BST::rSearch(Node *p, int key)
     return p;
 }
 
-Node *BST::del(int key)
+Node *BST::del(Node *p, int key)
 {
+    Node *q;
+    
+    if (p == NULL)
+        return NULL;
 
+    if (p->left == NULL && p->right == NULL)
+    {
+        if (p == root)
+            root = NULL;
+        
+        delete p;
+
+        return NULL;
+    }
+
+    if (key < p->data)
+        p->left = del(p->left, key);
+    else if (key > p->data)
+        p->right = del(p->right, key);
+    else
+    {
+        if (height(p->left) > height(p->right))
+        {
+            q = inPre(p->left);
+            p->data = q->data;
+            p->left = del(p->left, q->data);
+        }
+        else
+        {
+            q = inSucc(p->right);
+            p->data = q->data;
+            p->right = del(p->right, q->data);
+        } 
+    }
+
+    return p;
+}
+
+int BST::height(Node *p)
+{
+    if (p == NULL)
+        return 0;
+    
+    int x, y;
+    x = height(p->left);
+    y = height(p->right);
+
+    return x > y ? x+1 : y+1;
+}
+
+Node *BST::inPre(Node *p)
+{
+    while (p && p->right != NULL)
+        p = p->right;
+
+    return p;
+}
+
+Node *BST::inSucc(Node *p)
+{
+    while (p && p->left != NULL)
+        p = p->left;
+
+    return p;
 }
 
 
@@ -192,6 +258,30 @@ int main()
         std::cout << tmp->data << "\n";
     else
         std::cout << "element not found" << "\n";
+
+
+    // Inorder predecessor and inorder successor
+    BST bst3;
+    bst3.insert(5);
+    bst3.insert(2);
+    bst3.insert(8);
+    bst3.insert(7);
+    bst3.insert(9);
+    bst3.insert(1);
+ 
+    tmp = bst3.inPre(bst3.getRoot());
+    std::cout << "inPre: " << tmp->data << "\n";
+ 
+    tmp = bst3.inSucc(bst3.getRoot());
+    std::cout << "inSucc: " << tmp->data << "\n";
+ 
+    bst3.inorder(bst3.getRoot());
+    std::cout << "\n";
+ 
+    // Delete
+    bst3.del(bst3.getRoot(), 7);
+    bst3.inorder(bst3.getRoot());
+    std::cout << "\n";
 
     return 0;
 }

@@ -1,4 +1,4 @@
-// creating a binary search tree
+// delete a node from a binary search tree
 #include <iostream>
 
 class Node
@@ -37,6 +37,8 @@ public:
 
     Node *rInsert(Node *p, int key);
     Node *rSearch(Node *p, int key);
+
+    Node *del(int key);
 };
 
 void BST::insert(int key)
@@ -140,6 +142,11 @@ Node *BST::rSearch(Node *p, int key)
         p =  rSearch(p->right, key);
 
     return p;
+}
+
+Node *BST::del(int key)
+{
+
 }
 
 

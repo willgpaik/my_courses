@@ -49,18 +49,6 @@ T2 Stack<T2>::pop()
 {
     SNode<T2> *p;
 
-    /*// Define x with the correct type, depending on whether T2 is a pointer or not
-    typename std::conditional<std::is_pointer<T2>::value, T2, int>::type x;
-
-    if constexpr (std::is_pointer<T2>::value) {
-        // If T2 is a pointer, initialize to nullptr
-        x = nullptr;
-    } else {
-        // If T2 is not a pointer, initialize to -1
-        x = -1;
-    }*/
-
-    
     T2 x;
     if constexpr (std::is_pointer<T2>::value) {
         // If T2 is a pointer, initialize x to nullptr

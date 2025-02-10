@@ -87,6 +87,66 @@ Node *AVL::LLRotation(Node *p)
     return pl;
 }
 
+Node *AVL::LRRotation(Node *p)
+{
+    Node *pl, *plr;
+    pl = p->left;
+    plr = p->left->right;
+
+    pl->right = plr->left;
+    p->left = plr->right;
+    plr->left = pl;
+    plr->right = p;
+    
+    p->height = height(p);
+    pl->height = height(pl);
+    plr->height = height(plr);
+
+    if (root == p)
+        root = plr;
+
+    return plr;
+}
+
+Node *AVL::RRRotation(Node *p)
+{
+    Node *pr, *prl;
+    pr = p->right;
+    prl = p->right->left;
+
+    pr->left = p;
+    p->right = prl;
+
+    p->height = height(p);
+    pr->height = height(pr);
+
+    if (root == p)
+        root = pr;
+
+    return pr;
+}
+
+Node *AVL::RLRotation(Node *p)
+{
+    Node *pr, *prl;
+    pr = p->right;
+    prl = p->right->left;
+
+    p->right = prl->left;
+    pr->left = prl->right;
+    prl->left = p;
+    prl->right = pr;
+    
+    p->height = height(p);
+    pr->height = height(pr);
+    prl->height = height(prl);
+
+    if (root == p)
+        root = prl;
+
+    return prl;
+}
+
 Node *AVL::rInsert(Node *p, int key)
 {
     Node *t;
@@ -110,25 +170,60 @@ Node *AVL::rInsert(Node *p, int key)
 
     if (balanceFactor(p) == 2 && balanceFactor(p->left) == 1)
         return LLRotation(p);
-    /*else if (balanceFactor(p) == 2 && balanceFactor(p->left) == -1)
+    else if (balanceFactor(p) == 2 && balanceFactor(p->left) == -1)
         return LRRotation(p);
     else if (balanceFactor(p) == 2 && balanceFactor(p->right) == -1)
         return RRRotation(p);
     else if (balanceFactor(p) == 2 && balanceFactor(p->right) == 1)
         return RLRotation(p);
-*/
 
     return p;
+}
+
+void AVL::inorder(Node *p)
+{
+    if (p)
+    {
+        inorder(p->left);
+        std::cout << p->data << " ";
+        inorder(p->right);
+    }
 }
 
 
 int main()
 {
-    AVL avl(10);
-    avl.rInsert(avl.getRoot(), 5);
-    avl.rInsert(avl.getRoot(), 2);
+    // LL rotation
+    AVL ll(30);
+    ll.rInsert(ll.getRoot(), 20);
+    ll.rInsert(ll.getRoot(), 10);
 
-    std::cout << avl.getRoot()->data << "\n";
+    ll.inorder();
+    std::cout << "\n";
+
+    // LR rotation
+    AVL lr(30);
+    lr.rInsert(lr.getRoot(), 10);
+    lr.rInsert(lr.getRoot(), 20);
+
+    lr.inorder();
+    std::cout << "\n";
+
+    // RR rotation
+    AVL rr(10);
+    rr.rInsert(rr.getRoot(), 20);
+    rr.rInsert(rr.getRoot(), 30);
+
+    rr.inorder();
+    std::cout << "\n";
+
+    // RL rotation
+    AVL rl(10);
+    rl.rInsert(rl.getRoot(), 30);
+    rl.rInsert(rl.getRoot(), 20);
+
+    rl.inorder();
+    std::cout << "\n";
 
     return 0;
 }

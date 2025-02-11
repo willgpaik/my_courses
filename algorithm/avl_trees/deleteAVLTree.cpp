@@ -1,4 +1,5 @@
 // deleting a node from AVL tree
+// useful site: https://www.cs.usfca.edu/~galles/visualization/AVLtree.html
 #include <iostream>
 
 class Node
@@ -236,8 +237,32 @@ Node *AVL::del(Node *p, int key)
         p->right = del(p->right, key);
     else
     {
-        Node *q;   
+        // if node is found
+        Node *q;
+       
+        if (height(p->left) > height(p->right))
+        {
+            // if left subtree is taller, 
+            // find predecessor of p->data in inorder,
+            // then replace p with p's inorder predecessor
+            // and remove predecessor node
+            q = inPre(p->left);
+            p->data = q->data;
+            p->left = del(p->left, q->data);
+        }
+        else
+        {
+            // if right subtree is taller,
+            // find successor of p->data in inorder,
+            // then replace p with p's inorder successor
+            // and remove successor node
+            q = inSucc(p->right);
+            p->data = q->data;
+            p->right = del(p->right, q->data);
+        }
     }
+
+
 }
 
 

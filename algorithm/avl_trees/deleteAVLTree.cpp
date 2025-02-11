@@ -237,7 +237,6 @@ Node *AVL::del(Node *p, int key)
         p->right = del(p->right, key);
     else
     {
-        // if node is found
         Node *q;
        
         if (height(p->left) > height(p->right))

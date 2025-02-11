@@ -262,7 +262,16 @@ Node *AVL::del(Node *p, int key)
         }
     }
 
+    if (balanceFactor(p) == 2 && balanceFactor(p->left) == 1)
+        return LLRotation(p);
+    else if (balanceFactor(p) == 2 && balanceFactor(p->left) == -1)
+        return LRRotation(p);
+    else if (balanceFactor(p) == 2 && balanceFactor(p->right) == -1)
+        return RRRotation(p);
+    else if (balanceFactor(p) == 2 && balanceFactor(p->right) == 1)
+        return RLRotation(p);
 
+    return p;
 }
 
 
@@ -277,7 +286,7 @@ int main()
     tree.inorder();
     std::cout << "\n";
  
-    //tree.del(tree.getRoot(), 28);
+    tree.del(tree.getRoot(), 28);
    
     tree.inorder();
     std::cout << "\n";

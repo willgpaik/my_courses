@@ -18,7 +18,7 @@ void insert1(int *arr, int n)
 }
 
 template <class T>
-void disp(T &arr, int size)
+void disp(T arr, int size)
 {
     for (int i = 0; i < size; i++)
         std::cout << arr[i] << " ";

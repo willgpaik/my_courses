@@ -55,10 +55,9 @@ void insertInplace(T &arr, int n)
 } 
 
 template <class T>
-void create(T &arr)
+void create(T &arr, int size)
 {
-    int n = sizeof(arr)/sizeof(arr[0]);
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < size; i++)
         insertInplace(arr, i);
 }
 
@@ -80,6 +79,11 @@ int main()
     create(v, b, sizeof(b)/sizeof(b[0]));
     std::cout << "v: ";
     disp(v, v.size());
+
+    std::cout << "Inplace Insert\n";
+    create(b, sizeof(b)/sizeof(b[0]));
+    std::cout << "b: ";
+    disp(b, sizeof(b)/sizeof(b[0]));
 
     return 0;
 }

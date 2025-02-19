@@ -70,17 +70,21 @@ void create(std::vector<int> &arr, int *input, int size)
 template <class T>
 int del(T &arr, int n)
 {
-    int i, j, x;
-    x = arr[n-1];
+    // delete element from root and store it back at n
+    // it performs heap sort as well
+
+    int i, j, arrStart, arrEnd;
+    arrStart = arr[0];
+    arrEnd = arr[n-1];
     arr[0] = arr[n-1];
 
     // initial idx
     i = 0;
     j = 1;
 
-    while (j < n-1)
+    while (j < n - 1)
     {
-        if (arr[j++] > arr[j])
+        if (arr[j+1] > arr[j])
             j++;
         
         if (arr[i] < arr[j])
@@ -96,7 +100,9 @@ int del(T &arr, int n)
             break;
     }
 
-    return x;
+    arr[n-1] = arrStart;
+
+    return arrEnd;
 }
 
 
@@ -112,7 +118,7 @@ int main()
         del(a, i);
 
     for (int i = 0; i < 7; i++)
-        std::cout << a[i];
+        std::cout << a[i] << " ";
     std::cout << "\n";
 
     return 0;

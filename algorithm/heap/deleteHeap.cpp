@@ -118,6 +118,7 @@ int del(T &arr, int n)
             break;
     }
 
+    // put the first element (deleted element) at n
     arr[n] = arrStart;
 
     return arrEnd;

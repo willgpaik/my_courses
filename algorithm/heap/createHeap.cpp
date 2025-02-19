@@ -8,10 +8,16 @@ void insert1(int *arr, int n)
     int i = n;
     int tmp = arr[n];
     
-    while (i > 0 && tmp > arr[i/2])
+/*    while (i > 0 && tmp > arr[i/2])
     {
         arr[i] = arr[i/2];
         i = i/2;
+    }*/
+
+    while (i > 0 && tmp > arr[i % 2 == 0 ? (i/2)-1 : i/2])
+    {
+        arr[i] = arr[i % 2 == 0 ? (i/2)-1 : i/2];
+        i = i % 2 == 0 ? (i/2)-1 : i/2;
     }
     
     arr[i] = tmp;
@@ -30,10 +36,17 @@ void insert2(std::vector<int> &vec, int key)
     int i = vec.size();
     vec.push_back(key);
 
-    while (i > 0 && key > vec[i/2])
+/*    while (i > 0 && key > vec[i/2])
     {
         vec[i] = vec[i/2];
         i = i/2;
+    }*/
+
+    // Rearrange elements: Indices are not DRY :-(
+    while (i > 0 && key > vec[i % 2 == 0 ? (i/2)-1 : i/2])
+    {
+        vec[i] = vec[i % 2 == 0 ? (i/2)-1 : i/2];
+        i = i % 2 == 0 ? (i/2)-1 : i/2;
     }
 
     vec[i] = key;

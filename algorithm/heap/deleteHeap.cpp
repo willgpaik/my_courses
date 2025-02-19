@@ -8,10 +8,16 @@ void insert1(int *arr, int n)
     int i = n;
     int tmp = arr[n];
     
-    while (i > 0 && tmp > arr[i/2])
+/*    while (i > 0 && tmp > arr[i/2])
     {
         arr[i] = arr[i/2];
         i = i/2;
+    }*/
+
+    while (i > 0 && tmp > arr[i % 2 == 0 ? (i/2)-1 : i/2])
+    {
+        arr[i] = arr[i % 2 == 0 ? (i/2)-1 : i/2];
+        i = i % 2 == 0 ? (i/2)-1 : i/2;
     }
     
     arr[i] = tmp;
@@ -30,10 +36,17 @@ void insert2(std::vector<int> &vec, int key)
     int i = vec.size();
     vec.push_back(key);
 
-    while (i > 0 && key > vec[i/2])
+/*    while (i > 0 && key > vec[i/2])
     {
         vec[i] = vec[i/2];
         i = i/2;
+    }*/
+
+    // Rearrange elements: Indices are not DRY :-(
+    while (i > 0 && key > vec[i % 2 == 0 ? (i/2)-1 : i/2])
+    {
+        vec[i] = vec[i % 2 == 0 ? (i/2)-1 : i/2];
+        i = i % 2 == 0 ? (i/2)-1 : i/2;
     }
 
     vec[i] = key;
@@ -75,24 +88,29 @@ int del(T &arr, int n)
 
     int i, j, arrStart, arrEnd;
     arrStart = arr[0];
-    arrEnd = arr[n-1];
-    arr[0] = arr[n-1];
+    arrEnd = arr[n];
+    arr[0] = arr[n];
 
     // initial idx
     i = 0;
     j = 1;
 
-    while (j < n - 1)
+    while (j < n)
     {
+        // if j is smaller than j+1,
+        // j = j+1
         if (arr[j+1] > arr[j])
             j++;
-        
+
+        // if arr[i] < arr[j],
+        // swap arr[i] and arr[j]
         if (arr[i] < arr[j])
         {
             int tmp = arr[i];
             arr[i] = arr[j];
             arr[j] = tmp;
 
+            // move idx i and j
             i = j;
             j = i*2;
         }
@@ -100,7 +118,7 @@ int del(T &arr, int n)
             break;
     }
 
-    arr[n-1] = arrStart;
+    arr[n] = arrStart;
 
     return arrEnd;
 }
@@ -108,13 +126,14 @@ int del(T &arr, int n)
 
 int main()
 {
-    int a[] = {14, 15, 5, 20, 30, 8, 40};
+//    int a[] = {14, 15, 5, 20, 30, 8, 40};
+    int a[] = {10, 20, 30, 25, 5, 40, 35};
     for (int i = 0; i < 7; i++)
         insert1(a, i);
 
     disp(a, 7);
 
-    for (int i = 7; i > 0; i--)
+    for (int i = 6; i >= 0; i--)
         del(a, i);
 
     for (int i = 0; i < 7; i++)

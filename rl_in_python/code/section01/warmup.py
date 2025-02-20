@@ -17,7 +17,7 @@ x_t = np.array((np.ones(n_samples), np.linspace(0, 10, n_samples)))
 x = np.transpose(x_t)
 noise = np.random.normal(0, 2, n_samples)
 slope = 1
-intercept = 0
+intercept = 5
 y = slope * x[:,1] + intercept + noise
 
 w = np.array([0, 0]) # weights
@@ -38,7 +38,7 @@ while check:
     print (f'W: {w}, J: {mse}')
 
     # update weights
-    if np.linalg.norm(grad_mse) > 1e-1 or len(w_log) <= 1:
+    if np.linalg.norm(grad_mse) > 1e-6 or len(w_log) <= 1:
         w = w - lr * grad_mse
     else:
         w = w_log[-2] # previous one (-1 is already pushed current w value)

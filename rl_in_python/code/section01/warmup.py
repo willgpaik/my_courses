@@ -41,7 +41,7 @@ while check:
     if np.linalg.norm(grad_mse) > 1e-1 or len(w_log) <= 1:
         w = w - lr * grad_mse
     else:
-        w = w_log[-1]
+        w = w_log[-2] # previous one (-1 is already pushed current w value)
         check = False
 
 print(f'optimal parameters: {w}')

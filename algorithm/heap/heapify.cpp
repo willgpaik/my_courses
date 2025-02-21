@@ -134,21 +134,24 @@ void heapify(int *arr, int n)
         int j = 2 * i + 1; // left child for current i
         
         while (j < n-1)
+        {
             // compare left and right children of current i
             if (arr[j] < arr[j+1])
                 j = j + 1;
 
-        if (arr[i] < arr[j])
-        {
-            int tmp = arr[i];
-            arr[i] = arr[j];
-            arr[j] = tmp;
+            // compare parent and largest child
+            if (arr[i] < arr[j])
+            {
+                int tmp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = tmp;
 
-            i = j;
-            j = 2 * i + 1;
+                i = j;
+                j = 2 * i + 1;
+            }
+            else
+                break;
         }
-        else
-            break;
     }
 }
 

@@ -15,16 +15,16 @@ n_samples = 100 # number of samples
 
 x_t = np.array((np.ones(n_samples), np.linspace(0, 10, n_samples)))
 x = np.transpose(x_t)
-noise = np.random.normal(0, 2, n_samples)
+noise = np.random.normal(0, 2, n_samples) # random noise
 slope = 1
 intercept = 5
-y = slope * x[:,1] + intercept + noise
+y = slope * x[:,1] + intercept + noise # generate y values
 
 w = np.array([0, 0]) # weights
 lr = 0.01 # learning rate
 
-w_log = []
-loss_log = []
+w_log = [] # w history
+loss_log = [] # loss history
 check = True
 
 while check:

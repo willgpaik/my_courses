@@ -9,16 +9,16 @@ class Bandit:
     def __init__(self, p):
         # p: win rate
         self.p = p
-        self.p_estimate = 0.
-        self.N = 0.
+        self.p_estimate = 0. # initially 0
+        self.N = 0. # initially 0
 
     def pull(self):
         # draw a 1 with probability p
         return np.random.random() < self.p
 
     def update(self, x):
-        self.N += 1
-        self.p_estimate = self.p_estimate + (x - self.p_estimate)/self.N
+        self.N += 1 # add 1 to total number of sample collected until now
+        self.p_estimate = self.p_estimate + (x - self.p_estimate)/self.N # update current estimate
 
 def experiment():
     bandits = [Bandit(p) for p in BANDIT_PROBABILITIES]

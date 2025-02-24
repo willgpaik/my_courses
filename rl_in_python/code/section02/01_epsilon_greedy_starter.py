@@ -34,8 +34,10 @@ def experiment():
     print("optimal j: ", optimal_j)
 
     for i in range(NUM_TRIALS):
+        eps = EPS/(i+1) # implementing decaying epsilon
+
         # use epsilon-greedy to select the next bandit
-        if np.random.random() < EPS:
+        if np.random.random() < eps:
             num_times_explored += 1
             j = np.random.randint(len(bandits))
         else:

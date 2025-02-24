@@ -5,6 +5,8 @@ NUM_TRIALS = 10000
 EPS = 0.1
 BANDIT_PROBABILITIES = [0.2, 0.5, 0.75]
 
+np.random.seed(100)
+
 class Bandit:
     def __init__(self, p):
         # p: win rate
@@ -18,7 +20,8 @@ class Bandit:
 
     def update(self, x):
         self.N += 1 # add 1 to total number of sample collected until now
-        self.p_estimate = self.p_estimate + (x - self.p_estimate)/self.N # update current estimate
+        #self.p_estimate = self.p_estimate + (x - self.p_estimate)/self.N # update current estimate
+        self.p_estimate = ((self.N - 1)*self.p_estimate + x) / self.N
 
 def experiment():
     bandits = [Bandit(p) for p in BANDIT_PROBABILITIES]

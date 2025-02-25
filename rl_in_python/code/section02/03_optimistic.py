@@ -10,6 +10,7 @@ from builtins import range
 import matplotlib.pyplot as plt
 import numpy as np
 
+np.random.seed(100)
 
 NUM_TRIALS = 10000
 EPS = 0.1
@@ -20,8 +21,8 @@ class Bandit:
   def __init__(self, p):
     # p: the win rate
     self.p = p
-    self.p_estimate = # TODO
-    self.N = # TODO
+    self.p_estimate = 100 # TODO
+    self.N = 0 # TODO
 
   def pull(self):
     # draw a 1 with probability p
@@ -29,7 +30,8 @@ class Bandit:
 
   def update(self, x):
     # TODO
-    self.p_estimate = # TODO
+    self.N += 1
+    self.p_estimate = ((self.N - 1)*self.p_estimate + x) / self.N # TODO
 
 
 def experiment():
@@ -38,7 +40,7 @@ def experiment():
   rewards = np.zeros(NUM_TRIALS)
   for i in range(NUM_TRIALS):
     # use optimistic initial values to select the next bandit
-    j = # TODO
+    j = np.argmax(b.p_estimate for b in bandits) # TODO
 
     # pull the arm for the bandit with the largest sample
     x = bandits[j].pull()

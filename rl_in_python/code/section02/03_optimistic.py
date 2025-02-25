@@ -22,7 +22,7 @@ class Bandit:
     # p: the win rate
     self.p = p
     self.p_estimate = 100 # TODO
-    self.N = 0 # TODO
+    self.N = 1 # TODO
 
   def pull(self):
     # draw a 1 with probability p

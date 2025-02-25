@@ -18,7 +18,8 @@ class Bandit:
     def update(self, x):
         self.N += 1 # add 1 to total number of sample collected until now
         #self.p_estimate = self.p_estimate + (x - self.p_estimate)/self.N # update current estimate
-        self.m_estimate = ((self.N - 1)*self.m_estimate + x) / self.N
+        #self.m_estimate = ((self.N - 1)*self.m_estimate + x) / self.N
+        self.m_estimate = (1 - 1.0/self.N)*self.m_estimate + 1.0/self.N*x
 
 def run_exp(m1, m2, m3, eps, N):
     bandits = [Bandit(m1), Bandit(m2), Bandit(m3)]
@@ -51,7 +52,7 @@ def run_exp(m1, m2, m3, eps, N):
     plt.plot(cumulative_average)
     plt.plot(np.ones(N)*m1)
     plt.plot(np.ones(N)*m2)
-    plt.plot(np.ones(N)*m1)
+    plt.plot(np.ones(N)*m3)
     plt.xscale('log')
     plt.show()
 
@@ -66,7 +67,7 @@ if __name__ == "__main__":
     m1, m2, m3 = 1.5, 2.5, 3.5
     c_1 = run_exp(m1, m2, m3, 0.1, 100000)
     c_05 = run_exp(m1, m2, m3, 0.05, 100000)
-    c_01 = run_exp(m1, m2 ,m3, 0.05, 100000)
+    c_01 = run_exp(m1, m2 ,m3, 0.01, 100000)
 
     # log scale plot
     plt.plot(c_1, label='eps = 0.1')

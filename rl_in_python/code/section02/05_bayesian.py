@@ -28,7 +28,7 @@ class Bandit:
         return np.random.random() < self.p
 
     def sample(self):
-        return # TODO - draw a sample from Beta(a, b)
+        return np.random.beta(self.a, self.b) # TODO - draw a sample from Beta(a, b)
 
     def update(self, x):
         self.a += x # TODO
@@ -53,7 +53,7 @@ def experiment():
     rewards = np.zeros(NUM_TRIALS)
     for i in range(NUM_TRIALS):
         # Thompson sampling
-        j = # TODO
+        j = np.argmax([b.sample() for b in bandits]) # TODO
 
         # plot the posteriors
         if i in sample_points:
